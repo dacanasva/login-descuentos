@@ -1,0 +1,130 @@
+body {
+    background-color: #9165cc;
+    font-family: Arial, sans-serif;
+}
+
+.tml .tml-label {
+    display: block;
+    margin: 5em 0;
+    color: #fff;
+}
+
+[type="button"],
+[type="submit"],
+button {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #9165cc;
+    border: none;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    transition: all .3s;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.market-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 600px;
+}
+
+.login-container {
+    background-color: white;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #a166c8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: poppins;
+}
+
+button:hover {
+    background-color: #9165cc;
+}
+
+.toggle-password {
+    cursor: pointer;
+}
+
+.text-box {
+    border: 1px dashed #cccccc;
+    padding: 50px;
+    text-align: center;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    width: fit-content;
+    margin: 0 auto;
+    width: 400px
+}
+
+.olvide_mi_contraseña {
+    text-align: center;
+}
+
+iframe {
+    width: 100%
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
+    gap: 20px;
+    width: fit-content;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.logo-grande-linea-estetica {
+    margin: 0 auto;
+    width: 600px;
+    height: 200px;
+}
+
+.titulo-login {
+    color: #9165cc;
+    font-size: 65px;
+}
