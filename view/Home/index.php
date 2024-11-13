@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
     <link rel="shortcut icon" href="../../public/img/logo-linea estetica.png" type="image/x-icon">
     <title>Dashboard</title>
 </head>
+
 <body>
-    <?php 
+    <?php
     include('../../public/includes/navbar.php')
     ?>
     <div class="content">
@@ -39,11 +41,7 @@
                         <h2>Descuento por categoría</h2>
                         <label for="categoria">Selecciona una categoría:</label>
                         <select id="categoria" name="categoria" required>
-                            <option value="" disabled selected>-- Selecciona una categoría --</option>
-                            <option value="categoria1">Categoría 1</option>
-                            <option value="categoria2">Categoría 2</option>
-                            <option value="categoria3">Categoría 3</option>
-                            <option value="categoria4">Categoría 4</option>
+                            <option value="" disabled selected>-- Cargando categorías --</option>
                         </select>
                         <label for="porcentaje">Ingresa un porcentaje (0-100):</label>
                         <input type="number" id="porcentaje" name="porcentaje" min="0" max="100" required>
@@ -62,4 +60,5 @@
         </main>
     </div>
 </body>
+
 </html>

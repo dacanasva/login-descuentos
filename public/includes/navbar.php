@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/Dashboard.css">
+    <script>
+        function logout() {
+            // Eliminar el estado de sesión
+            sessionStorage.removeItem('isLoggedIn');
+            
+            // Redirigir a la página de inicio de sesión
+            window.location.href = '../../index.php'; // Cambia esta URL según tu estructura
+
+            // Manipular el historial para evitar navegación hacia atrás
+            history.pushState(null, '', window.location.href);
+            window.onpopstate = function() {
+                history.pushState(null, '', window.location.href);
+            };
+        }
+    </script>
     <title>Document</title>
     <style>
         * {
@@ -72,16 +87,18 @@
             background-color: #6200ea;
             color: #fff;
             padding: 10px;
+            text-align: center;
             border-radius: 20px;
-            border: none; /* Sin borde */
-            cursor: pointer; /* Cambiar cursor al pasar el ratón */
-            display: flex; /* Usar flex para alinear el icono y el texto */
-            align-items: center; /* Centrar verticalmente */
+            border: none; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            width: 100%;
         }
 
         button svg {
-            margin-right: 5px; /* Espacio entre el icono y el texto del botón */
-            fill: #fff; /* Color del icono del botón */
+            margin-right: 20px; 
+            fill: #fff; 
         }
 
         /* Main Content Area */
@@ -120,23 +137,20 @@
         }
     </style>
 </head>
-
 <body>
     <div class="navbar">
-        <img src="../img/19197184.jpg" alt="logo">
         <a href="#home">Descuentos</a>
         <a href="#services">Servicios</a>
         <a href="#about">Acerca de</a>
         <a href="#contact">Contacto</a>
         <div class="logout-container">
-            <a href="../../index.php">
-                <button type="button" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
-                        <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
-                    </svg> Cerrar Sesión</button>
-            </a>
+            <button type="button" class="btn btn-primary" onclick="logout()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                </svg>Cerrar Sesión
+            </button>
         </div>
     </div>
 </body>
-
 </html>

@@ -1,0 +1,19 @@
+{
+    "name": "darwin/descuentos",
+    "description": "login y descuentos a productos",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Darwin\\Descuentos\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Darwin"
+        }
+    ],
+    "require": {
+        "automattic/woocommerce": "^3.1",
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}
