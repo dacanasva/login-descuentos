@@ -1,6 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <title>Login linea estetica</title>
   <link rel="shortcut icon" href="./public/img/logo-linea estetica.png" type="image/x-icon">
@@ -27,7 +27,7 @@
       <br>
     </div>
     <div class="market-container">
-      <img class="logo-grande-linea-estetica" src="./public/img/Logo-Linena-Estetica-2023.webp" alt="" style="width: 550px;">
+      <img class="logo-grande-linea-estetica" src=".\public\img\Logo-Linena-Estetica-2023.png" alt="" style="width: 600px;">
       <div class="text-box">
         TU MARKET DE BIENESTAR
       </div>

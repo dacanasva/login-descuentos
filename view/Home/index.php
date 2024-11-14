@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <link rel="shortcut icon" href="../../public/img/logo-linea estetica.png" type="image/x-icon">
     <title>Dashboard</title>
 </head>
-
 <body>
     <?php
     include('../../public/includes/navbar.php')
@@ -32,20 +30,21 @@
                     <label for="tiempoFin">Fecha y hora de fin:</label>
                     <input type="datetime-local" id="tiempoFin" name="tiempoFin" required>
 
-                    <button type="submit">Enviar</button>
+                    <button type="submit">Aplicar Descuento</button>
                 </form>
             </div>
             <div class="two-colunm-descount">
                 <div class="descount-category">
-                    <form action="funtions/Dest-category.php" method="POST" id="myFormCATEGORY">
+                    <form method="POST" id="myFormCATEGORY">
                         <h2>Descuento por categoría</h2>
-                        <label for="categoria">Selecciona una categoría:</label>
-                        <select id="categoria" name="categoria" required>
-                            <option value="" disabled selected>-- Cargando categorías --</option>
+                        <label for="categorySelect">Selecciona una categoría:</label>
+                        <select id="categorySelect">
+                            <!-- Opciones cargadas dinámicamente -->
                         </select>
-                        <label for="porcentaje">Ingresa un porcentaje (0-100):</label>
-                        <input type="number" id="porcentaje" name="porcentaje" min="0" max="100" required>
-                        <button type="submit">Enviar</button>
+                        <label for="discountInput">Introduce el porcentaje de descuento:</label>
+                        <input type="number" id="discountInput" placeholder="Por ejemplo, 20 para un 20%">
+
+                        <button type="submit">Aplicar Descuento</button>
                     </form>
                 </div>
                 <div class="descount-CSV">
@@ -53,7 +52,7 @@
                     <form action="funtions/Dest-sku-csv.php" method="POST" id="myFormCSV" enctype="multipart/form-data">
                         <label for="archivo">Selecciona un archivo (solo CSV):</label>
                         <input type="file" id="archivo" name="archivo" accept=".csv" required>
-                        <button type="submit">Enviar</button>
+                        <button type="submit">Aplicar Descuento</button>
                     </form>
                 </div>
             </div>

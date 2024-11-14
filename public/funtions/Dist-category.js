@@ -1,82 +1,80 @@
-const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
-const readline = require('readline');
+const consumerKey = 'ck_03d37f7c11559ff35484a77883d921e98053a1f9';
+const consumerSecret = 'cs_d743d76be10065ed0c0ada82ea2cbef3b9e3d190';
+const categoriesUrl = 'http://localhost:8080/wordpress/wp-json/wc/v3/products/categories';
 
-// Configuración de la API de WooCommerce
-const WooCommerce = new WooCommerceRestApi({
-    url: 'http://localhost:8080/wordpress/',
-    consumerKey: 'ck_03d37f7c11559ff35484a77883d921e98053a1f9',
-    consumerSecret: 'cs_d743d76be10065ed0c0ada82ea2cbef3b9e3d190',
-    version: 'wc/v3'
-});
-
-// Función para leer entrada del usuario de forma asíncrona
-function askQuestion(query) {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
-
-    return new Promise(resolve => rl.question(query, ans => {
-        rl.close();
-        resolve(ans);
-    }))
-}
-
-// Función principal asíncrona
-async function applyCategoryDiscount() {
+// Función para cargar las categorías al cargar la página
+async function loadCategories() {
     try {
-        // Obtener categorías
-        const { data: categories } = await WooCommerce.get('products/categories');
-        
-        // Imprimir categorías disponibles
-        console.log("➜ Categorías disponibles:");
-        categories.forEach((category, index) => {
-            console.log(`${index}: ${category.name} (ID: ${category.id})`);
+        const response = await axios.get(categoriesUrl, {
+            auth: {
+                username: consumerKey,
+                password: consumerSecret
+            }
         });
 
-        // Solicitar selección de categoría
-        const selectedCategoryIndex = parseInt(await askQuestion("Selecciona el número de la categoría: "));
-        
-        if (selectedCategoryIndex < 0 || selectedCategoryIndex >= categories.length) {
-            console.log("Categoría no válida.");
-            return;
-        }
+        const categories = response.data;
+        const categorySelect = document.getElementById('categoria');
 
-        const selectedCategoryId = categories[selectedCategoryIndex].id;
+        // Limpiar opciones existentes
+        categorySelect.innerHTML = '<option value="" disabled selected>-- Selecciona una categoría --</option>';
 
-        // Solicitar porcentaje de descuento
-        const discountPercentage = parseFloat(await askQuestion("Introduce el porcentaje de descuento (por ejemplo, 20 para un 20%): "));
-        
-        if (isNaN(discountPercentage) || discountPercentage < 0 || discountPercentage > 100) {
-            console.log("Porcentaje de descuento no válido. Debe estar entre 0 y 100.");
-            return;
-        }
-
-        // Obtener productos de la categoría seleccionada
-        const { data: products } = await WooCommerce.get('products', { category: selectedCategoryId });
-
-        // Aplicar descuento a cada producto
-        for (const product of products) {
-            // Verificar si el producto tiene precio regular
-            if (product.regular_price) {
-                const regularPrice = parseFloat(product.regular_price);
-                const salePrice = regularPrice * (1 - (discountPercentage / 100));
-
-                // Actualizar producto con nuevo precio de venta
-                await WooCommerce.put(`products/${product.id}`, {
-                    sale_price: salePrice.toFixed(2)
-                });
-
-                console.log(`➜ Producto actualizado: ${product.name} con nuevo precio de venta: ${salePrice.toFixed(2)}`);
-            } else {
-                console.log(`➜ Producto ${product.name} no tiene precio regular, no se aplica descuento.`);
-            }
-        }
-
+        // Agregar cada categoría al select
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.id; // Usamos el ID de la categoría como valor
+            option.textContent = category.name; // El nombre de la categoría como texto
+            categorySelect.appendChild(option);
+        });
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('Error al cargar las categorías:', error);
+        alert('Ocurrió un error al cargar las categorías.');
     }
 }
 
-// Ejecutar el script
-applyCategoryDiscount();
+// Llamar a la función para cargar las categorías al cargar la página
+loadCategories();
+
+document.getElementById('myFormCATEGORY').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Evita el envío del formulario
+
+    const categoryId = document.getElementById('categoria').value; // Captura la categoría seleccionada
+    const discountPercentage = parseFloat(document.getElementById('porcentaje').value); // Captura el porcentaje
+
+    try {
+        const productsResponse = await axios.get('http://localhost:8080/wordpress/wp-json/wc/v3/products', {
+            params: {
+                category: categoryId
+            },
+            auth: {
+                username: consumerKey,
+                password: consumerSecret
+            }
+        });
+
+        const products = productsResponse.data;
+
+        for (const product of products) {
+            if (product.regular_price) {
+                const regularPrice = parseFloat(product.regular_price);
+                const salePrice = (regularPrice * (1 - (discountPercentage / 100))).toFixed(2); // Aplica el descuento
+
+                await axios.put(`http://localhost:8080/wordpress/wp-json/wc/v3/products/${product.id}`, {
+                    sale_price: salePrice
+                }, {
+                    auth: {
+                        username: consumerKey,
+                        password: consumerSecret
+                    }
+                });
+
+                console.log(`Producto actualizado: ${product.name} con nuevo precio de venta: ${salePrice}`);
+            } else {
+                console.log(`Producto ${product.name} no tiene precio regular, no se aplica descuento.`);
+            }
+        }
+        alert('Descuentos aplicados correctamente.');
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error al aplicar el descuento.');
+    }
+});
