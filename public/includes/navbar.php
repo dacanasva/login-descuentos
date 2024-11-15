@@ -36,6 +36,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            color: #000;
+            padding: 3px;
+            border-radius: 2px;
         }
 
         body {
@@ -48,29 +51,22 @@
         .navbar {
             position: fixed;
             top: 0;
-            /* Ajustar para que esté en la parte superior */
             left: 0;
             width: 200px;
             height: 96%;
-            /* Altura completa */
             background-color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
             border-radius: 15px;
-            /* Bordes redondeados */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            /* Sombra para el contenedor */
             margin: 10px;
-            /* Separación de las paredes */
         }
 
         .navbar img {
             width: 100%;
-            /* Ajustar el logo al ancho del contenedor */
             margin-bottom: 20px;
-            /* Espacio entre el logo y los enlaces */
         }
 
         .navbar a {
@@ -80,29 +76,21 @@
             width: 100%;
             transition: background 0.3s;
             display: flex;
-            /* Usar flex para alinear el icono y el texto */
             align-items: center;
-            /* Centrar verticalmente */
         }
 
         .navbar a svg {
             margin-right: 10px;
-            /* Espacio entre el icono y el texto */
             fill: #fff;
-            /* Color del icono */
         }
 
         .navbar a:hover {
             background-color: #444;
-            /* Cambiar el color al pasar el ratón */
         }
 
-        /* Contenedor para el botón de cerrar sesión */
         .logout-container {
             margin-top: auto;
-            /* Empujar el botón al final del contenedor */
             width: 100%;
-            /* Asegurarse de que ocupe todo el ancho */
             text-align: center;
         }
 
@@ -124,10 +112,8 @@
             fill: #fff;
         }
 
-        /* Main Content Area */
         body>*:not(.navbar):not(footer) {
             margin-left: 220px;
-            /* Offset para navbar */
             padding: 20px;
         }
 
@@ -138,13 +124,9 @@
 
         .navbar a {
             color: white;
-            /* Color del texto */
             text-decoration: none;
-            /* Quita el subrayado */
             padding: 8px 16px;
-            /* Espaciado interno */
             display: inline-block;
-            /* Para que el padding funcione correctamente */
         }
 
         .navbar a:hover {
@@ -159,31 +141,101 @@
 
         .logout-container button {
             color: white;
-            /* Color del texto del botón */
             border: none;
-            /* Sin borde */
             padding: 10px 20px;
-            /* Espaciado interno */
             cursor: pointer;
-            /* Cambia el cursor al pasar sobre el botón */
+        }
+
+        .sub-menu {
+            display: none;
+            /* Ocultamos el submenú por defecto */
+            margin-left: 20px;
+            /* Margen para los subenlaces */
+            background-color: white;
+            /* Fondo blanco */
+            padding: 10px;
+            /* Espaciado interno */
+            border: 1px solid #ccc;
+            /* Borde opcional */
+        }
+
+        /* Estilo para los enlaces dentro del submenú */
+        .sub-menu a {
+            color: black;
+            /* Cambiar el color del texto a negro para que sea visible */
+            text-decoration: none;
+            /* Quitar subrayado */
+        }
+
+        .sub-menu a:hover {
+            text-decoration: underline;
+            /* Subrayar al pasar el mouse */
+        }
+
+        .config {
+            background-color: #000;
+            border-radius: 50px;
+        }
+
+        .cofig-logut {
+            display: flex;
+            margin-top: auto;
+            margin-right: auto;
+        }
+
+        .logo-lineaestetica {
+            background-color: #fff;
+            width: 180px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
-        <a href="#home"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
+        <div class="logo-lineaestetica">
+            <img src="/public/img/logoCalifacto.png" alt="logo">
+            <img src="/public/img/Califacto.png" alt="logo">
+        </div>
+        <a href="#home">Dashboard</a>
+        <a href="#" onclick="toggleSubMenu(); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
                 <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0M4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5m7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
-            </svg>Descuentos</a>
-        <div class="logout-container">
-            <button type="button" class="btn btn-primary" onclick="logout()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
-                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
-                </svg>
-                Cerrar Sesión
-            </button>
+            </svg>
+            Descuentos</a>
+        <div id="sub-menu" class="sub-menu">
+            <a href="#">Por categoria</a><br>
+            <a href="#">Por CSV</a>
+        </div>
+        <div class="cofig-logut">
+            <div class="logout-container">
+                <button type="button" class="btn btn-primary" onclick="logout()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
+                        <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </div>
+            <div class="config">
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                    </svg></a>
+            </div>
         </div>
     </div>
+    <script>
+        function toggleSubMenu() {
+            var subMenu = document.getElementById("sub-menu");
+            if (subMenu.style.display === "none" || subMenu.style.display === "") {
+                subMenu.style.display = "block"; // Mostrar el submenú
+            } else {
+                subMenu.style.display = "none"; // Ocultar el submenú
+            }
+        }
+    </script>
 </body>
 
 </html>
